@@ -11,6 +11,22 @@ router.get('/', (req, res) => {
 
 // get one product
 router.get('/:id', (req, res) => {
+  Product.findOne({
+    where: {
+      id: req.params.id
+    },
+    include: [
+      {
+        model: Category,
+        attributes: ['category_name']
+      },
+      {
+        model: Tag,
+        attributes: []
+      }
+    ],
+
+  })
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
 });

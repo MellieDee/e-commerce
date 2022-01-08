@@ -1,13 +1,39 @@
-const { Model, DataTypes } = require('sequelize');
+// imp primary parts of sequelize lib
+const { Model, DataTypes, INET, INTEGER } = require('sequelize');
 
+// import db connection from config
 const sequelize = require('../config/connection');
 
-class ProductTag extends Model {}
+
+// Initialize model (table) by extending off Seq Model class
+class ProductTag extends Model { }
 
 ProductTag.init(
+  // define columns
   {
-    // define columns
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+
+    product_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'product',
+        key: 'id'
+      }
+    },
+    tag_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'tag',
+        key: 'id'
+      }
+    }
   },
+  // 2nd param of init
   {
     sequelize,
     timestamps: false,
