@@ -1,5 +1,5 @@
 // imp primary parts of sequelize lib
-const { Model, DataTypes, INET, INTEGER } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 // import db connection from config
 const sequelize = require('../config/connection');
@@ -7,6 +7,8 @@ const sequelize = require('../config/connection');
 
 // Initialize model (table) by extending off Seq Model class
 class ProductTag extends Model { }
+
+//create Junction Model/join/Through Table
 
 ProductTag.init(
   // define columns
@@ -20,6 +22,7 @@ ProductTag.init(
 
     product_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: 'product',
         key: 'id'
@@ -27,6 +30,7 @@ ProductTag.init(
     },
     tag_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: 'tag',
         key: 'id'
