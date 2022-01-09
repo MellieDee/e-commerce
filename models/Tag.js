@@ -19,10 +19,6 @@ Tag.init(
     },
     tag_name: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [3]
-      }
     }
   },
   // 2nd param of init

@@ -20,9 +20,6 @@ Category.init(
     category_name: {
       type: DataTypes.STRING,
       allowNull: false
-      // validate: {
-      //   len: [1]
-      // }
     },
   },
   // 2nd param of init

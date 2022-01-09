@@ -3,21 +3,24 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
-//find ALL Products
+// find ALL Products
 router.get('/', (req, res) => {
   Product.findAll({
     attributes:
       [['id', 'product_id'], 'product_name', 'price', 'stock'],
     include: [
-      // {
-      //   model: Category,
-      //   attributes:
-      //     [['id', 'cat_id'], ['category_name', 'cat_name']]
-      // },
+      {
+        model: Category,
+        attributes:
+          [['id', 'cat_id'], ['category_name', 'cat_name']]
+      },
       {
         model: Tag,
-        attributes: { exclude: 'product_tag' }
-        //[['id', 'tag_id'], 'tag_name',
+        attributes: [['id', 'tag_id'], 'tag_name'],
+        through: {
+          attributes: []
+        }
+
       }
     ],
   })
@@ -28,29 +31,38 @@ router.get('/', (req, res) => {
     })
 });
 
-// get one product
+// find ONE product
 router.get('/:id', (req, res) => {
   Product.findOne({
     where: {
       id: req.params.id
     },
+    attributes:
+      [['id', 'product_id'], 'product_name', 'price', 'stock'],
     include: [
       {
         model: Category,
-        attributes: ['category_name']
+        attributes:
+          [['id', 'cat_id'], ['category_name', 'cat_name']]
       },
       {
         model: Tag,
-        attributes: []
+        attributes: [['id', 'tag_id'], 'tag_name'],
+        through: {
+          attributes: []
+        }
       }
     ],
-
   })
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+    .then(productData => res.json(productData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    })
 });
 
-// create new product
+
+// create NEW product
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {
