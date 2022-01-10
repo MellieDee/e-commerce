@@ -50,7 +50,7 @@ From command line npm install the following: `npm install`</br>
 `mysql -u <username> -p`</br>
 If need to re-seed the database ~</br>
 From the command-line, run the above mysql command to start mysql. Follow prompts</br>
-Database is ecommerce_db</br>
+Database is ecommerce_db</br>(To create the database use mySQL shell statement `CREATE DATABASE ecommerce_db`)
 
 In mySql command-line shell -
 `source db/schema.sql`
@@ -60,7 +60,8 @@ Confirm sequelize.sync force is set to true in server.js & seeds/index.js. </br>
 Run `node seeds/index.js` to seed</br>
 
 Immediately change force to false in both files
-Run `node server` to start
+Run `node server` to start.
+()
 
 &nbsp;
 
