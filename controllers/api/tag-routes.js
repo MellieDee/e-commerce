@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
         attributes:
           [['id', 'product_id'], 'product_name', 'price', 'stock'],
         through: {
-          attributes: [],
+          attributes: ['id', 'product_id', 'tag_id'],
         },
         include:
         {
@@ -45,7 +45,7 @@ router.get('/:id', (req, res) => {
         attributes:
           [['id', 'product_id'], 'product_name', 'price', 'stock'],
         through: {
-          attributes: [],
+          attributes: ['id', 'product_id', 'tag_id'],
         },
         include:
         {

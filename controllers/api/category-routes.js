@@ -13,8 +13,9 @@ router.get('/', (req, res) => {
     include:
     {
       model: Product,
-      attributes:
-        [['id', 'product_id'], 'product_name', 'price', 'stock']
+      // Can uncomment this line to remove category_id redundancy
+      // attributes:
+      //   [['id', 'product_id'], 'product_name', 'price', 'stock']
     }
   })
     .then(categoryData => res.json(categoryData))
@@ -30,13 +31,14 @@ router.get('/:id', (req, res) => {
   // find one category by its `id` value
   Category.findOne({
     where: { id: req.params.id },
-    attributes:
-      [['id', 'category_id'], 'category_name'],
+    // attributes:
+    //   [['id', 'category_id'], 'category_name'],
     include:
     {
       model: Product,
-      attributes:
-        [['id', 'product_id'], 'product_name', 'price', 'stock']
+      // Can uncomment this line to remove category_id redundancy
+      // attributes:
+      //   [['id', 'product_id'], 'product_name', 'price', 'stock']
     },
   })
     .then(categoryData => {
