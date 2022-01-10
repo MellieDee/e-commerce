@@ -32,7 +32,7 @@ router.get('/', (req, res) => {
 });
 
 
-// find ONE Tag
+// find ONE Tag by ID
 router.get('/:id', (req, res) => {
   Tag.findOne({
     where: {
@@ -56,7 +56,13 @@ router.get('/:id', (req, res) => {
       }
     ],
   })
-    .then(tagData => res.json(tagData))
+    .then(dbUserData => {
+      if (!dbUserData) {
+        res.status(404).json({ message: 'No tag found with that ID' });
+        return;
+      }
+      res.json(dbUserData);
+    })
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
@@ -67,13 +73,8 @@ router.get('/:id', (req, res) => {
 
 // create NEW Tag
 router.post('/', (req, res) => {
+  //req.body should look like this  --> { tag_name: "purple", productIds: [1, 2, 5] }
 
-  /* req.body should look like this...
-  {
-   tag_name: "purple",
-    productIds: [1, 2, 5]
-  }
-*/
   Tag.create(req.body)
     .then((tag) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
@@ -97,12 +98,40 @@ router.post('/', (req, res) => {
     });
 });
 
-router.put('/:id', (req, res) => {
-  // update a tag's name by its `id` value
-});
 
+// UPDATE Tag by ID
+router.put('/:id', (req, res) => {
+  //expects:{"tag_name": "name"}
+  Tag.update(req.body, {
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then(tagData => {
+      if (!tagData) {
+        res.status(404).json({ message: 'No tag found with that ID' });
+        return;
+      }
+      res.json(tagData);
+
+    });
+})
+
+
+// DELETE ONE Tag by ID
 router.delete('/:id', (req, res) => {
-  // delete on tag by its `id` value
+  Tag.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(tagData => {
+      if (!tagData) {
+        res.status(404).json({ message: 'No tag found with that ID.' });
+        return;
+      }
+      res.json(tagData);
+    })
 });
 
 module.exports = router;

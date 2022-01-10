@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
     })
 });
 
-// find ONE product
+// find ONE product by ID
 router.get('/:id', (req, res) => {
   Product.findOne({
     where: {
@@ -94,9 +94,20 @@ router.post('/', (req, res) => {
     });
 });
 
-// update product
+
+
+//  UPDATE  Product by ID
 router.put('/:id', (req, res) => {
   // update product data
+  /*expects:
+  {
+    "product_name": "Basketball Jersey M",
+    "price": 200.00,
+    "stock": 3,
+    "category_id": 1,
+    "tagIds": [6, 7]
+  }
+  */
   Product.update(req.body, {
     where: {
       id: req.params.id,
@@ -136,8 +147,21 @@ router.put('/:id', (req, res) => {
     });
 });
 
+
+// DELETE ONE Product by ID
 router.delete('/:id', (req, res) => {
-  // delete one product by its `id` value
+  Product.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(productData => {
+      if (!productData) {
+        res.status(404).json({ message: 'No product found with that ID.' });
+        return;
+      }
+      res.json(productData);
+    })
 });
 
 module.exports = router;
