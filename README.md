@@ -78,7 +78,7 @@ Since this is the back end, it is not deployed. Use Heroku to see sample functio
 ---
 
 Does not have a deployment URL.
-[eCommerce run through on YouTube](https://youtu.be/)
+[eCommerce run through on YouTube](https://youtu.be/ZxoK9hW8Xb4)
 
 &nbsp;
 
