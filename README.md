@@ -1,4 +1,4 @@
-# **<center>cCommerce Back End</center>**
+# **<center>eCommerce Back End</center>**
 
 **<center>FEATURES</center>**
 
