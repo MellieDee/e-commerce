@@ -68,7 +68,7 @@ Run `node server` to start
 
 ---
 
-This program will allow users to create, view, update and delete products, Categories and Tags.</br>
+This program will allow users to create, view, update and delete Products, Categories and Tags.</br>
 Since this is the back end, it is not deployed. Use Heroku to see sample functionality by entering the various paths (see Heroku walkthrough video.)</br>Stop the server with command-line shortcuts.
 
 &nbsp;
